@@ -149,16 +149,15 @@ int main() {
             close(pipe_fds[i][0]);
      
         }
-        for(int i=0;i<size;i++) {
-            wait(NULL);
-        }
 
-        free_list(files_list, size);
-        printf("Successfully reached end of program.\n");
     }
 
 
+    for(int i=0;i<size;i++) {
+        wait(NULL);
+    }
 
-
+    free_list(files_list, size);
+    printf("Successfully reached end of program.\n");
     return 0;
 }
