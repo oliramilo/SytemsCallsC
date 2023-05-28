@@ -132,7 +132,7 @@ int main() {
             close(pipe_fds[i][0]);   
             char message[BUFFER_SIZE];
             read(pipe_fds[i][0], message,sizeof(message));
-            printf("File name: %s\n", message);
+            printf("File name: %s\n", files_list[i]);
             strcat(message, " - Reply from child!");
             write(pipe_fds[i][1], message,strlen(message) + 1);
         }
@@ -142,8 +142,6 @@ int main() {
             close(pipe_fds[i][1]);
 
             char message[BUFFER_SIZE];
-            strcpy(message,files_list[i]);
-
             write(pipe_fds[i][0],message, strlen(message));
             
             read(pipe_fds[i][0], message, sizeof(message));
@@ -154,6 +152,7 @@ int main() {
         for(int i=0;i<size;i++) {
             wait(NULL);
         }
+
         free_list(files_list, size);
         printf("Successfully reached end of program.\n");
     }
