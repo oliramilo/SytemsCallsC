@@ -163,10 +163,6 @@ int main() {
         }
     }
 
-    for (int i = 0; i < size; i++) {
-        printf("Child process with PID %d completed.\n", waitpid(-1, &status, 0));
-    }
-
     free_list(files_list, size);
     return 0;
 }
