@@ -147,14 +147,9 @@ int main() {
             
             read(pipe_fds[i][0], message, sizeof(message));
             close(pipe_fds[i][0]);
-     
+            wait(NULL);
         }
 
-    }
-
-
-    for(int i=0;i<size;i++) {
-        wait(NULL);
     }
 
     free_list(files_list, size);
