@@ -146,7 +146,7 @@ int main() {
             strcpy(message, files_list[i]);
             write(pipe_fds[i][0],message, strlen(message));
             
-            read(pipe_fds[i][0], message, sizeof(message));
+            read(pipe_fds[i][0], message, strlen(message));
             close(pipe_fds[i][0]);
             wait(NULL);
         }
