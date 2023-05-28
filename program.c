@@ -119,10 +119,11 @@ int main() {
         }
     }
 
+    int status;
     /**Creating child processes**/
     for(int i=0;i<size;i++) {
         pid = fork();
-        int status;
+
         /**Fork fail**/
         if(pid < 0) {
             perror("Fork error, failed to fork a child process\n");
@@ -155,7 +156,7 @@ int main() {
                 return 1;
             }
             close(pipe_fds[i][1]);
-            waitpid(pid, &status, 0);
+            waitpid(&status);
             read(pipe_fds[i][0], message, strlen(message));
 
 
