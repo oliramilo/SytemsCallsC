@@ -125,6 +125,6 @@ int main() {
     }
 
     free_list(files_list, size);
-    printf("Successfully reached end of program.");
+    printf("Successfully reached end of program.\n");
     return 0;
 }
