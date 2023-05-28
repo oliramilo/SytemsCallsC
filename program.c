@@ -133,7 +133,7 @@ int main() {
         else if(pid == 0) { 
             close(pipe_fds[i][1]);
             char message[BUFFER_SIZE];
-            ssize_t bytesRead =read(pipe_fds[i][0], message,strlen(message));
+            ssize_t bytesRead =read(pipe_fds[i][0], message,sizeof(message));
             if(bytesRead == -1) {
                 perror("Failed to read from pipe.\n");
                 exit(1);
