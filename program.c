@@ -5,7 +5,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-char* EXT = ".usp";
+#define EXT ".usp"
+#define BUFFER_SIZE 1024
 
 int arithmatic_calc(int num1, int num2, char op) {
     int result;
@@ -96,7 +97,10 @@ int main() {
         printf("An error occured while looking for files\n");
         return 0;
     }
+
+
     files_list = get_files(size);
+
     if(files_list == NULL) {
         printf("An error occurred while obtaining file names.");
         return 0;
@@ -116,20 +120,43 @@ int main() {
     /**Creating child processes**/
     for(int i=0;i<size;i++) {
         pid = fork();
+
+        /**Fork fail**/
         if(pid < 0) {
             perror("Fork error, failed to fork a child process\n");
             exit(EXIT_FAILURE);
         }
+
+        /**Child process**/
         else if(pid == 0) {
             close(pipe_fds[i][0]);   
+            char message[BUFFER_SIZE];
+            read(pipe_fds[i][0], message,sizeof(message));
+            printf("File name: %s\n", message)
+            strcat(message, " - Reply from child!");
+            write(pipe_fds[i][1], message,strlen(message) + 1);
+        }
+
+        /**Parent process**/
+        else {
+            close(pipe_fds[i][1]);
+
+            char message[BUFFER_SIZE] = files_list[i];
+
+            write(pipe_fds[i][0],message, strlen(message));
+            
+            read(pipe_fds[i][0], message, sizeof(message));
+            printf("Parent processed received: %s\n", message);
+            for(int i=0;i<size;i++) {
+                wait(NULL);
+            }
+            free_list(files_list, size);
+            printf("Successfully reached end of program.\n");
         }
     }
 
-    for(int i=0;i<size;i++) {
-        wait(NULL);
-    }
 
-    free_list(files_list, size);
-    printf("Successfully reached end of program.\n");
+
+
     return 0;
 }
