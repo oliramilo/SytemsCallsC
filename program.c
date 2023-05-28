@@ -131,7 +131,7 @@ int main() {
         else if(pid == 0) { 
             char message[BUFFER_SIZE];
             read(pipe_fds[i][1], message,sizeof(message));
-            print("Child received file: %s\n", message);
+            printf("Child received file: %s\n", message);
             strcat(message, " - Reply from child!");
         
             write(pipe_fds[i][1], message,strlen(message) + 1);
