@@ -149,13 +149,13 @@ int main() {
             read(pipe_fds[i][0], message, sizeof(message));
             printf("Parent processed received: %s\n", message);
             close(pipe_fds[i][0]);
-            for(int i=0;i<size;i++) {
-                wait(NULL);
-            }
-           
-            printf("Successfully reached end of program.\n");
+     
+        }
+        for(int i=0;i<size;i++) {
+            wait(NULL);
         }
         free_list(files_list, size);
+        printf("Successfully reached end of program.\n");
     }
 
 
