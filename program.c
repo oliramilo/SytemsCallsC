@@ -147,6 +147,7 @@ int main() {
             
             read(pipe_fds[i][0], message, sizeof(message));
             printf("Parent processed received: %s\n", message);
+            close(pipe_fds[i]);
             for(int i=0;i<size;i++) {
                 wait(NULL);
             }
