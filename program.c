@@ -131,7 +131,6 @@ int main() {
 
         /**Child process**/
         else if(pid == 0) { 
-            char buffer[100];
 
             close(pipe_fds[i][1]);
             char message[BUFFER_SIZE];
@@ -140,8 +139,8 @@ int main() {
                 perror("Failed to read from pipe.\n");
                 exit(1);
             }
-            buffer[bytesRead] = '\0';
-            printf("%s\n", buffer);
+            message[bytesRead] = '\0';
+            printf("%s\n", message);
         }
 
         /**Parent process**/
@@ -150,7 +149,7 @@ int main() {
 
             char message[BUFFER_SIZE];
             strcpy(message, files_list[i]);
-            ssize_t bytesWritten = write(pipe_fds[i][1],message, strlen(message));
+            ssize_t bytesWritten = write(pipe_fds[i][1],message, strlen(message)-1);
             if(bytesWritten == -1) {
                 perror("Failed to write to pipe.\n");
                 return 1;
