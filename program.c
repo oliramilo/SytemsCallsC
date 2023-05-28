@@ -66,6 +66,7 @@ char** get_files(int size) {
             if (ent->d_type == DT_REG) { /**Check for file type**/
                  if (strstr(ent->d_name, EXT) != NULL && strcmp(strstr(ent->d_name, EXT), EXT) == 0) {
                     files_list[ptr] = (char*)malloc(sizeof(char)*strlen(ent->d_name));
+                    printf("%s\n", ent->d_name);
                     strcpy(files_list[ptr], ent->d_name);
                     ptr++;
                 }
