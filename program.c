@@ -140,7 +140,7 @@ int main() {
                 exit(1);
             }
             message[bytesRead] = '\0';
-            printf("%s\n", message);
+            printf("Child No. %d, File passed: %s\n",i, message);
         }
 
         /**Parent process**/
