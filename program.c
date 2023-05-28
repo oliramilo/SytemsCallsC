@@ -156,7 +156,7 @@ int main() {
                 return 1;
             }
             close(pipe_fds[i][1]);
-            waitpid(&status);
+            wait(&status);
             read(pipe_fds[i][0], message, strlen(message));
 
 
@@ -164,7 +164,7 @@ int main() {
     }
 
     for (int i = 0; i < size; i++) {
-    printf("Child process with PID %d completed.\n", waitpid(-1, &status, 0));
+        printf("Child process with PID %d completed.\n", waitpid(-1, &status, 0));
     }
 
     free_list(files_list, size);
