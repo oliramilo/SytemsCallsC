@@ -128,11 +128,12 @@ int main() {
         }
 
         /**Child process**/
-        else if(pid == 0) {
-            close(pipe_fds[i][0]);   
+        else if(pid == 0) { 
             char message[BUFFER_SIZE];
-            read(pipe_fds[i][0], message,sizeof(message));
+            read(pipe_fds[i][1], message,sizeof(message));
+            print("Child received file: %s\n", message);
             strcat(message, " - Reply from child!");
+        
             write(pipe_fds[i][1], message,strlen(message) + 1);
         }
 
@@ -142,7 +143,6 @@ int main() {
 
             char message[BUFFER_SIZE];
             strcpy(message, files_list[i]);
-            printf("Copied file: %s\n", message);
             write(pipe_fds[i][0],message, strlen(message));
             
             read(pipe_fds[i][0], message, sizeof(message));
