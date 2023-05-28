@@ -150,7 +150,7 @@ int main() {
 
             char message[BUFFER_SIZE];
             strcpy(message, files_list[i]);
-            ssize_t bytesWritten = write(pipe_fds[i][1],message, strlen(message)-1);
+            ssize_t bytesWritten = write(pipe_fds[i][1],message, strlen(message));
             if(bytesWritten == -1) {
                 perror("Failed to write to pipe.\n");
                 return 1;
