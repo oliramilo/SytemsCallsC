@@ -132,7 +132,7 @@ int main() {
             close(pipe_fds[i][0]);   
             char message[BUFFER_SIZE];
             read(pipe_fds[i][0], message,sizeof(message));
-            printf("File name: %s\n", files_list[i]);
+            printf("File name: %s\n", *files_list[i]);
             strcat(message, " - Reply from child!");
             write(pipe_fds[i][1], message,strlen(message) + 1);
         }
