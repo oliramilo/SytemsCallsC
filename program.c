@@ -120,7 +120,7 @@ int main() {
     /**Creating child processes**/
     for(int i=0;i<size;i++) {
         pid = fork();
-
+        int status;
         /**Fork fail**/
         if(pid < 0) {
             perror("Fork error, failed to fork a child process\n");
@@ -129,26 +129,32 @@ int main() {
 
         /**Child process**/
         else if(pid == 0) { 
-            close(pipe_fds[i][0]);
+            close(pipe_fds[i][1]);
             char message[BUFFER_SIZE];
-            read(pipe_fds[i][0], message,sizeof(message));
+            ssize_t bytesRead =read(pipe_fds[i][0], message,sizeof(message)-1);
+            if(bytesRead == -1) {
+                perror("Failed to read from pipe.\n");
+                exit(1);
+            }
             printf("Child received file: %s\n", message);
             strcat(message, " - Reply from child!");
-        
-            write(pipe_fds[i][1], message,strlen(message) + 1);
         }
 
         /**Parent process**/
         else {
-            close(pipe_fds[i][1]);
+            close(pipe_fds[i][0]);
 
             char message[BUFFER_SIZE];
             strcpy(message, files_list[i]);
-            write(pipe_fds[i][0],message, strlen(message));
-            
+            ssize_t bytesWritten = write(pipe_fds[i][1],message, strlen(message)-1);
+            if(bytesWritten == -1) {
+                perror("Failed to write to pipe.\n");
+                return 1;
+            }
+            waitpid(pid, &status, 0);
             read(pipe_fds[i][0], message, strlen(message));
-            close(pipe_fds[i][0]);
-            wait(NULL);
+            close(pipe_fds[i]);
+
         }
 
     }
