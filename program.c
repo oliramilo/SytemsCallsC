@@ -131,8 +131,8 @@ int main() {
 
         /**Child process**/
         else if(pid == 0) { 
-            char buffer[BUFFER_SIZE];
-            
+            char buffer[100];
+
             close(pipe_fds[i][1]);
             char message[BUFFER_SIZE];
             ssize_t bytesRead =read(pipe_fds[i][0], message,sizeof(message)-1);
