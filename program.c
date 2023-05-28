@@ -138,8 +138,7 @@ int main() {
                 perror("Failed to read from pipe.\n");
                 exit(1);
             }
-            printf("Child received file: %s\n", message);
-            strcat(message, " - Reply from child!");
+            printf("%s\n", message);
         }
 
         /**Parent process**/
