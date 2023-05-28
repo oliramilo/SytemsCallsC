@@ -129,6 +129,7 @@ int main() {
 
         /**Child process**/
         else if(pid == 0) { 
+            close(pipe_fds[i][0]);
             char message[BUFFER_SIZE];
             read(pipe_fds[i][1], message,sizeof(message));
             printf("Child received file: %s\n", message);
