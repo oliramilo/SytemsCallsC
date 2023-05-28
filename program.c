@@ -151,9 +151,10 @@ int main() {
                 perror("Failed to write to pipe.\n");
                 return 1;
             }
+            close(pipe_fds[i][1]);
             waitpid(pid, &status, 0);
             read(pipe_fds[i][0], message, strlen(message));
-            close(pipe_fds[i]);
+
 
         }
 
