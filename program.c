@@ -132,7 +132,6 @@ int main() {
 
         /**Child process**/
         else if(pid == 0) { 
-
             close(pipe_fds[i][1]);
             char message[BUFFER_SIZE];
             ssize_t bytesRead =read(pipe_fds[i][0], message,sizeof(message)-1);
@@ -142,10 +141,13 @@ int main() {
             }
             message[bytesRead] = '\0';
             printf("Child No. %d, File passed: %s\n",i, message);
+            close(pipe_fds[i][0]);
+            exit(0);
         }
 
-        /**Parent process**/
-        else {
+    }
+
+    for(int i=0;i<size;i++) {
             close(pipe_fds[i][0]);
 
             char message[BUFFER_SIZE];
@@ -156,11 +158,14 @@ int main() {
                 return 1;
             }
             close(pipe_fds[i][1]);
-            wait(&status);
-            read(pipe_fds[i][0], message, strlen(message));
+            //close(pipe_fds[i][1]);
+            //wait(NULL);
+            //wait(&status);
+            //read(pipe_fds[i][0], message, strlen(message));
+    }
 
-
-        }
+    for(int i=0;i<size;i++) {
+        wait(NULL);
     }
 
     free_list(files_list, size);
