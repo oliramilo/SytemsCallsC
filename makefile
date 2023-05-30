@@ -1,2 +1,2 @@
-prog:
-	gcc -o main program.c
+calculator:
+	gcc -o calculator program.c
