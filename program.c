@@ -70,7 +70,8 @@ char** get_files(int size) {
     struct dirent *ent;
     int ptr = 0;
     char **files_list= (char**)malloc(size*sizeof(char*));
-    /**Read current directory and store each filename in our files_list array**/
+    /**Read current directory and store each filename in our files_list array
+     * https://stackoverflow.com/questions/22886290/c-get-all-files-with-certain-extension**/
     if ((dir = opendir(".")) != NULL) { 
         while ((ent = readdir(dir)) != NULL) {
             if (ent->d_type == DT_REG) { /**Check for file type**/
@@ -162,6 +163,7 @@ int main() {
             char buf;
             int fd_one;
 
+            /**Open file for read only**/
             fd_one = open(message, O_RDONLY);
             if (fd_one == -1)
             {
@@ -178,6 +180,7 @@ int main() {
             char reply[1024];
             char* token;
             char* id;
+        
             total_bytes_read = read(fd_one, buffer, BUFFER_SIZE);
 
             if(total_bytes_read == -1) {
@@ -187,7 +190,7 @@ int main() {
 
             /**Get the first line using strtok, newline delimiter to split file contents**/
             token = strtok(buffer,"\n");
-
+            printf("ID: %s\n", token);
             strcpy(reply,token);
 
             token = strtok(NULL, "\n");
@@ -200,7 +203,7 @@ int main() {
             num_two = atoi(token);
 
             int answer = arithmatic_calc(num_one,num_two,operator);
-
+            printf("ID: %s calculation: %d %c %d = %d\n", token, num_one,operator,num_two,answer);
             /**compilation error due, implicit declaration of itoa
              * alternative solution found: https://stackoverflow.com/questions/10162465/implicit-declaration-of-function-itoa-is-invalid-in-c99 **/
             char result_string[20];
@@ -251,8 +254,6 @@ int main() {
         }
         response[bytesRead] = '\0';  // Manually null-terminate the received data
 
-        // Print the received response from the child
-        printf("Parent process received response from child %d: %s\n", i, response);
         write(fd_write_to_file,&response, strlen(response));
 
         close(pipe_fds_2[i][0]);
