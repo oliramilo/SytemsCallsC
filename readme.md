@@ -1,5 +1,5 @@
 # Calculator Programme using System Calls in C
-# (Unix Systems Programming Assignment)[https://www.curtin.edu.au/study/offering/unit-ug-unix-systems-programming--comp2002/] 
+# (https://www.curtin.edu.au/study/offering/unit-ug-unix-systems-programming--comp2002/)[Unix Systems Programming Assignment] 
 
 ## Author: Olimar Ramilo 
 
@@ -19,7 +19,6 @@
 
 Program reads all .usp files within current directory
 .usp files contains contents in the following format:
-    example: 
     
         .usp Format:
           File ID
