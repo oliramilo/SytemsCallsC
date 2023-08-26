@@ -1,5 +1,5 @@
 # Calculator Programme using System Calls in C
-# (https://www.curtin.edu.au/study/offering/unit-ug-unix-systems-programming--comp2002/)[Unix Systems Programming Assignment] 
+(Unix Systems Programming Assignment)[https://www.curtin.edu.au/study/offering/unit-ug-unix-systems-programming--comp2002/]
 
 ## Author: Olimar Ramilo 
 
