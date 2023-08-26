@@ -1,7 +1,7 @@
-# Unix Systems Programming Assignment
+# Calculator Programme using System Calls in C
+
 
 ## Author: Olimar Ramilo 
-### Student ID: 19763211
 
 ## Compilation
 - make calculator
@@ -17,16 +17,9 @@
 - <sys/wait.h>
 - <fcntl.h>
 
-## Unfixed bugs and issues
-- Results saves to file but the #id breaks newline and the line below is t he calculated result 
 
     example: 
     ```
         #00152955:
         54
     ```
-    instead of:
-    ```
-        #00152955:54
-    ```
-- itoa resulting in implicit declaration, alternatively used sprintf to convert integers to string
