@@ -1,5 +1,5 @@
 # Calculator Programme using System Calls in C
-
+# (Unix Systems Programming Assignment)[https://www.curtin.edu.au/study/offering/unit-ug-unix-systems-programming--comp2002/] 
 
 ## Author: Olimar Ramilo 
 
@@ -17,9 +17,16 @@
 - <sys/wait.h>
 - <fcntl.h>
 
-
+Program reads all .usp files within current directory
+.usp files contains contents in the following format:
     example: 
     ```
-        #00152955:
-        54
+        .usp Format:
+          File ID
+          Number
+          Operator
+          Number
+        Results in:
+          #00152955:
+          54
     ```
