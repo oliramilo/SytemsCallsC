@@ -23,9 +23,13 @@ Program reads all .usp files within current directory
     ```
         .usp Format:
           File ID
+          
           Number
+          
           Operator
+          
           Number
+        
         Results in:
           #00152955:
           54
