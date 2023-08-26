@@ -20,6 +20,7 @@
 Program reads all .usp files within current directory
 .usp files contains contents in the following format:
     example: 
+    
         .usp Format:
           File ID
           
