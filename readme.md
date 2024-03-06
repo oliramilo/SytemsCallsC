@@ -30,5 +30,4 @@ Program reads all .usp files within current directory
           Number
         
         Results in:
-          #00152955:
-          54
+          #00152955:54
